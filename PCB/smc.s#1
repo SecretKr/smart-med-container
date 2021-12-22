@@ -12146,13 +12146,13 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <description>&lt;b&gt;LAB11&lt;/b&gt; - Switches.</description>
 <packages>
 <package name="RES_SWITCH">
-<smd name="C" x="0" y="0" dx="0.56" dy="0.56" layer="1"/>
-<smd name="A" x="-0.88" y="0" dx="0.56" dy="0.56" layer="1"/>
-<smd name="B" x="0.88" y="0" dx="0.56" dy="0.56" layer="1"/>
-<text x="-0.72" y="0.41" size="0.6096" layer="21">A</text>
-<text x="0.21" y="0.43" size="0.6096" layer="21">B</text>
-<circle x="-0.45" y="-0.03" radius="0.031621875" width="0.127" layer="21"/>
-<circle x="0.44" y="-0.03" radius="0.031621875" width="0.127" layer="21"/>
+<smd name="C" x="0" y="0" dx="1.27" dy="1.27" layer="1"/>
+<smd name="A" x="-1.642" y="0" dx="1.27" dy="1.27" layer="1"/>
+<smd name="B" x="1.642" y="0" dx="1.27" dy="1.27" layer="1"/>
+<text x="-1.863" y="0.664" size="0.6096" layer="21">A</text>
+<text x="1.353" y="0.684" size="0.6096" layer="21">B</text>
+<circle x="-0.831" y="-0.03" radius="0.031621875" width="0.127" layer="21"/>
+<circle x="0.821" y="-0.03" radius="0.031621875" width="0.127" layer="21"/>
 </package>
 </packages>
 <symbols>

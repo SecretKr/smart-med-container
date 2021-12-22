@@ -1,13 +1,17 @@
-#include <Scheduler.h>
+#include <TaskScheduler.h>
+Scheduler runner;
+void task1code();
+void task2code();
+Task Task1(60000, TASK_FOREVER, &task1code);
+Task Task2(1000, TASK_FOREVER, &task2code);
 #include <ESP8266HTTPClient.h>
 String serverName = "http://ikwmystery.atwebpages.com";
 
 // Wifi
 #include <ESP8266WiFi.h>
-#include <ESPAsyncTCP.h>
-char* ssid = "ff8";
-char* password = "Tekanawww9735";
-#include <ESPAsyncWebServer.h>
+#include <WiFiManager.h>
+//char* ssid = "ff8";
+//char* password = "Tekanawww9735";
 
 // Time
 #include <time.h>
@@ -114,81 +118,85 @@ void notifyStatus(int sta){
   if(sta == 3) LINE.notify("Place Med Container back");
 }
 
-class Task1code : public Task {
-public:
-  void loop(){
-    getTime();
-    getTimeSet();
-    Serial.print(timeNow.tm_hour);
-    Serial.print(" ");
-    Serial.println(timeNow.tm_min);
-  
-    for(int i = 0;i < alarms;i++){
-      if(timeNow.tm_hour == alarmTime[i].tm_hour && timeNow.tm_min == alarmTime[i].tm_min){
-        status = 1;
-        Serial.println(status);
-        timeOut.tm_hour = alarmTime[i].tm_hour + 0;
-        timeOut.tm_min += alarmTime[i].tm_min + timeOutMin;
-        if(timeOut.tm_min >= 60) {
-          timeOut.tm_min -= 60; timeOut.tm_hour += 1;
-        }
-      }
-    }
-    ldrVal = analogRead(LDR);
-    if(ldrVal < ldrSet) noBottleStart++;
-    else noBottleStart = 0;
-    if(noBottleStart >= 5){
-      notifyStatus(3);
-    }
-    delay(60000);
-  }
-}task_1;
 
-class Task2code : public Task {
-public:
-  void setup(){
-    LINE.notify("start");
-  }
-  void loop(){
-    if(status == 1){
-      notifyStatus(1);
-      eat = false;
-      while(eat == false){
-        ldrVal = analogRead(LDR);
-        Serial.println(ldrVal);
-        eat = true;
-        for(int i = 0;i < 10;i++){
-          ldrVal = analogRead(LDR);
-          if(ldrVal >= ldrSet) eat = false;
-          delay(100);
-        }
-        Serial.print("timeOut ");
-        Serial.print(timeOut.tm_hour);
-        Serial.print(" ");
-        Serial.println(timeOut.tm_min);
-        if(timeNow.tm_min == timeOut.tm_min && timeNow.tm_hour == timeOut.tm_hour && status != 2){
-          status = 2;
-          notifyStatus(2);
-        }
+void task1code(){
+  getTime();
+  getTimeSet();
+  Serial.print(timeNow.tm_hour);
+  Serial.print(" ");
+  Serial.println(timeNow.tm_min);
+
+  for(int i = 0;i < alarms;i++){
+    if(timeNow.tm_hour == alarmTime[i].tm_hour && timeNow.tm_min == alarmTime[i].tm_min){
+      status = 1;
+      Serial.println(status);
+      timeOut.tm_hour = alarmTime[i].tm_hour + 0;
+      timeOut.tm_min += alarmTime[i].tm_min + timeOutMin;
+      if(timeOut.tm_min >= 60) {
+        timeOut.tm_min -= 60; timeOut.tm_hour += 1;
       }
-      status = 0;
-      notifyStatus(0);
     }
-    delay(1000);
   }
-}task_2;
+  ldrVal = analogRead(LDR);
+  if(ldrVal < ldrSet) noBottleStart++;
+  else noBottleStart = 0;
+  if(noBottleStart >= 5){
+    notifyStatus(3);
+  }
+}
+
+
+void task2code(){
+  if(status == 1){
+    notifyStatus(1);
+    eat = false;
+    while(eat == false){
+      ldrVal = analogRead(LDR);
+      Serial.println(ldrVal);
+      eat = true;
+      for(int i = 0;i < 10;i++){
+        ldrVal = analogRead(LDR);
+        if(ldrVal >= ldrSet) eat = false;
+        delay(100);
+      }
+      Serial.print("timeOut ");
+      Serial.print(timeOut.tm_hour);
+      Serial.print(" ");
+      Serial.println(timeOut.tm_min);
+      if(timeNow.tm_min == timeOut.tm_min && timeNow.tm_hour == timeOut.tm_hour && status != 2){
+        status = 2;
+        notifyStatus(2);
+      }
+    }
+    status = 0;
+    notifyStatus(0);
+  }
+}
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("Connecting");
-  WiFi.begin(ssid, password);
-  while(WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
+  WiFi.mode(WIFI_STA);
+  WiFiManager wm;
+  bool res;
+  res = wm.autoConnect("AutoConnectAP","password");
+  if(!res){
+    Serial.println("Failed to connect");
   }
-  Serial.println("");
-  Serial.print("Connected to WiFi network with IP Address: ");
-  Serial.println(WiFi.localIP());
+  else{
+    Serial.println("Connected");
+  }
+//  Serial.println("Connecting");
+//  WiFi.begin(ssid, password);
+//  while(WiFi.status() != WL_CONNECTED) {
+//    delay(500);
+//    Serial.print(".");
+//  }
+//  server.on("/", handlePortal);
+//  server.begin();
+//  Serial.println("");
+//  Serial.print("Connected to WiFi network with IP Address: ");
+//  Serial.println(WiFi.localIP());
+  
   timeClient.begin();
   LINE.setToken(LINE_TOKEN);
   Serial.printf("Firebase Client v%s\n\n", FIREBASE_CLIENT_VERSION);
@@ -211,10 +219,12 @@ void setup() {
   Serial.print(" ");
   Serial.println(timeNow.tm_min);
 
-  Scheduler.start(&task_1);
-  Scheduler.start(&task_2);
-  Scheduler.begin();
+  runner.addTask(Task1);
+  Task1.enable();
+  runner.addTask(Task2);
+  Task2.enable();
 }
 
 void loop() {
+  runner.execute();
 }
