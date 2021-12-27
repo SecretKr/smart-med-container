@@ -1,2 +1,3 @@
-# medicine alarm
-this is a React website for setting alarm clock connected to ESP32
+# Smart Medecine Container
+
+Notify when it's time for medicine.

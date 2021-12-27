@@ -14,7 +14,7 @@ function Clock(props) {
   }
 
   return (
-    <div className="clock-container">
+    <div className={props.cn}>
     <h3>Set your Medicine Alarm</h3>
       <div className="clock">
           <TimePicker maxValue={24} increment={1} passValue={passValue} id="hour" key="hour" />
