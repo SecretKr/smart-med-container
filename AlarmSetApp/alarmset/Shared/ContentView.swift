@@ -12,8 +12,8 @@ struct ContentView: View {
     @State private var minute = 0
     
     var body: some View {
-        VStack{
-            VStack{
+        VStack(alignment: .leading){
+            VStack(alignment: .center){
                 HStack {
                     Spacer()
                     Text("Set your Medicine Alarm")
@@ -25,8 +25,11 @@ struct ContentView: View {
                 .background(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=View@*/Color.blue/*@END_MENU_TOKEN@*/)
                 .foregroundColor(/*@START_MENU_TOKEN@*/.white/*@END_MENU_TOKEN@*/)
                 SetTime()
+                Spacer()
             }
-            
+            .alignmentGuide(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=Guide@*/.top/*@END_MENU_TOKEN@*/) { dimension in
+                /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/dimension[.top]/*@END_MENU_TOKEN@*/
+            }
             Spacer()
         }
         .background(
@@ -38,5 +41,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+.previewInterfaceOrientation(.portrait)
     }
 }
