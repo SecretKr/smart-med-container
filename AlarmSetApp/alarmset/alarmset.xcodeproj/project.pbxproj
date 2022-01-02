@@ -1,0 +1,526 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		997D86E72773397C005F06DB /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 997D86E62773397C005F06DB /* FirebaseAnalytics */; };
+		997D86E92773397C005F06DB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 997D86E82773397C005F06DB /* FirebaseAuth */; };
+		997D86EB2773397C005F06DB /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 997D86EA2773397C005F06DB /* FirebaseDatabase */; };
+		99C1C23B2769E40A0005354F /* alarmsetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C1C22B2769E4090005354F /* alarmsetApp.swift */; };
+		99C1C23C2769E40A0005354F /* alarmsetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C1C22B2769E4090005354F /* alarmsetApp.swift */; };
+		99C1C23D2769E40A0005354F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C1C22C2769E4090005354F /* ContentView.swift */; };
+		99C1C23E2769E40A0005354F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C1C22C2769E4090005354F /* ContentView.swift */; };
+		99C1C23F2769E40A0005354F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99C1C22D2769E40A0005354F /* Assets.xcassets */; };
+		99C1C2402769E40A0005354F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99C1C22D2769E40A0005354F /* Assets.xcassets */; };
+		99C1C24A2769E4360005354F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 99C1C2492769E4360005354F /* GoogleService-Info.plist */; };
+		99C1C24B2769E4360005354F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 99C1C2492769E4360005354F /* GoogleService-Info.plist */; };
+		99C1C2542769EF190005354F /* SelectTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C1C2532769EF180005354F /* SelectTime.swift */; };
+		99C1C2552769EF190005354F /* SelectTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C1C2532769EF180005354F /* SelectTime.swift */; };
+		99F85D72276A12AB00AD4008 /* SetTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F85D71276A12AB00AD4008 /* SetTime.swift */; };
+		99F85D73276A12AB00AD4008 /* SetTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F85D71276A12AB00AD4008 /* SetTime.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		99C1C22B2769E4090005354F /* alarmsetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alarmsetApp.swift; sourceTree = "<group>"; };
+		99C1C22C2769E4090005354F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		99C1C22D2769E40A0005354F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		99C1C2322769E40A0005354F /* alarmset.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = alarmset.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		99C1C2382769E40A0005354F /* alarmset.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = alarmset.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		99C1C23A2769E40A0005354F /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		99C1C2492769E4360005354F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		99C1C2532769EF180005354F /* SelectTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTime.swift; sourceTree = "<group>"; };
+		99F85D71276A12AB00AD4008 /* SetTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetTime.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		99C1C22F2769E40A0005354F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				997D86EB2773397C005F06DB /* FirebaseDatabase in Frameworks */,
+				997D86E72773397C005F06DB /* FirebaseAnalytics in Frameworks */,
+				997D86E92773397C005F06DB /* FirebaseAuth in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99C1C2352769E40A0005354F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		99C1C2252769E4090005354F = {
+			isa = PBXGroup;
+			children = (
+				99C1C22A2769E4090005354F /* Shared */,
+				99C1C2392769E40A0005354F /* macOS */,
+				99C1C2332769E40A0005354F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		99C1C22A2769E4090005354F /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				99C1C22B2769E4090005354F /* alarmsetApp.swift */,
+				99C1C22C2769E4090005354F /* ContentView.swift */,
+				99C1C2532769EF180005354F /* SelectTime.swift */,
+				99F85D71276A12AB00AD4008 /* SetTime.swift */,
+				99C1C22D2769E40A0005354F /* Assets.xcassets */,
+				99C1C2492769E4360005354F /* GoogleService-Info.plist */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		99C1C2332769E40A0005354F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				99C1C2322769E40A0005354F /* alarmset.app */,
+				99C1C2382769E40A0005354F /* alarmset.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		99C1C2392769E40A0005354F /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				99C1C23A2769E40A0005354F /* macOS.entitlements */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		99C1C2312769E40A0005354F /* alarmset (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 99C1C2432769E40A0005354F /* Build configuration list for PBXNativeTarget "alarmset (iOS)" */;
+			buildPhases = (
+				99C1C22E2769E40A0005354F /* Sources */,
+				99C1C22F2769E40A0005354F /* Frameworks */,
+				99C1C2302769E40A0005354F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "alarmset (iOS)";
+			packageProductDependencies = (
+				997D86E62773397C005F06DB /* FirebaseAnalytics */,
+				997D86E82773397C005F06DB /* FirebaseAuth */,
+				997D86EA2773397C005F06DB /* FirebaseDatabase */,
+			);
+			productName = "alarmset (iOS)";
+			productReference = 99C1C2322769E40A0005354F /* alarmset.app */;
+			productType = "com.apple.product-type.application";
+		};
+		99C1C2372769E40A0005354F /* alarmset (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 99C1C2462769E40A0005354F /* Build configuration list for PBXNativeTarget "alarmset (macOS)" */;
+			buildPhases = (
+				99C1C2342769E40A0005354F /* Sources */,
+				99C1C2352769E40A0005354F /* Frameworks */,
+				99C1C2362769E40A0005354F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "alarmset (macOS)";
+			productName = "alarmset (macOS)";
+			productReference = 99C1C2382769E40A0005354F /* alarmset.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		99C1C2262769E4090005354F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					99C1C2312769E40A0005354F = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					99C1C2372769E40A0005354F = {
+						CreatedOnToolsVersion = 13.1;
+					};
+				};
+			};
+			buildConfigurationList = 99C1C2292769E4090005354F /* Build configuration list for PBXProject "alarmset" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 99C1C2252769E4090005354F;
+			packageReferences = (
+				997D86E52773397C005F06DB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			productRefGroup = 99C1C2332769E40A0005354F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				99C1C2312769E40A0005354F /* alarmset (iOS) */,
+				99C1C2372769E40A0005354F /* alarmset (macOS) */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		99C1C2302769E40A0005354F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99C1C23F2769E40A0005354F /* Assets.xcassets in Resources */,
+				99C1C24A2769E4360005354F /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99C1C2362769E40A0005354F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99C1C2402769E40A0005354F /* Assets.xcassets in Resources */,
+				99C1C24B2769E4360005354F /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		99C1C22E2769E40A0005354F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99C1C23D2769E40A0005354F /* ContentView.swift in Sources */,
+				99C1C23B2769E40A0005354F /* alarmsetApp.swift in Sources */,
+				99C1C2542769EF190005354F /* SelectTime.swift in Sources */,
+				99F85D72276A12AB00AD4008 /* SetTime.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		99C1C2342769E40A0005354F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				99C1C23E2769E40A0005354F /* ContentView.swift in Sources */,
+				99C1C23C2769E40A0005354F /* alarmsetApp.swift in Sources */,
+				99C1C2552769EF190005354F /* SelectTime.swift in Sources */,
+				99F85D73276A12AB00AD4008 /* SetTime.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		99C1C2412769E40A0005354F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MACOSX_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		99C1C2422769E40A0005354F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MACOSX_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		99C1C2442769E40A0005354F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A7T6B4X2BC;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "alarmset--iOS--Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = smartmedcontainer.alarmset;
+				PRODUCT_NAME = alarmset;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		99C1C2452769E40A0005354F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A7T6B4X2BC;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "alarmset--iOS--Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = smartmedcontainer.alarmset;
+				PRODUCT_NAME = alarmset;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		99C1C2472769E40A0005354F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = smartmedcontainer.alarmset;
+				PRODUCT_NAME = alarmset;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		99C1C2482769E40A0005354F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = smartmedcontainer.alarmset;
+				PRODUCT_NAME = alarmset;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		99C1C2292769E4090005354F /* Build configuration list for PBXProject "alarmset" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99C1C2412769E40A0005354F /* Debug */,
+				99C1C2422769E40A0005354F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		99C1C2432769E40A0005354F /* Build configuration list for PBXNativeTarget "alarmset (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99C1C2442769E40A0005354F /* Debug */,
+				99C1C2452769E40A0005354F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		99C1C2462769E40A0005354F /* Build configuration list for PBXNativeTarget "alarmset (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				99C1C2472769E40A0005354F /* Debug */,
+				99C1C2482769E40A0005354F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		997D86E52773397C005F06DB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = exactVersion;
+				version = 8.9.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		997D86E62773397C005F06DB /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 997D86E52773397C005F06DB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		997D86E82773397C005F06DB /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 997D86E52773397C005F06DB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		997D86EA2773397C005F06DB /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 997D86E52773397C005F06DB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 99C1C2262769E4090005354F /* Project object */;
+}
