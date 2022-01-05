@@ -3,9 +3,11 @@ Scheduler runner;
 void task1code();
 void task2code();
 void task3code();
+void beep();
 Task Task1(20000, TASK_FOREVER, &task1code);
 Task Task2(1000, TASK_FOREVER, &task2code);
 Task Task3(250, TASK_FOREVER, &task3code);
+//Task Task4(5000, TASK_FOREVER, &task4code);
 #include <ESP8266HTTPClient.h>
 String serverName = "http://ikwmystery.atwebpages.com";
 
@@ -133,7 +135,7 @@ void setLogs(int ho, int mi, int et){
   json.set("date", date);
   json.set("hour", ho);
   json.set("minute", mi);
-  json.set("eat-time", et);
+  json.set("eatTime", et);
   String sMonth, sDate;
   if(month < 10) sMonth = "0"+String(month);
   else sMonth = String(month);
@@ -182,6 +184,9 @@ void task1code(){
   Serial.print(timeNow.tm_hour);
   Serial.print(" ");
   Serial.println(timeNow.tm_min);
+  if(timeNow.tm_hour != 7 || timeNow.tm_min != 0){
+    ledBlink = false;
+  }
 
   if(lastEat > 10) for(int i = 0;i < alarms;i++){
     if(timeNow.tm_hour == alarmTime[i].tm_hour && timeNow.tm_min == alarmTime[i].tm_min){
@@ -214,6 +219,7 @@ void task2code(){
     eat = false;
     int start_wait = millis();
     if(ledOn) digitalWrite(pinLed, 1);
+    buzzBlink = true;
     while(eat == false){
       ldrVal = analogRead(LDR);
       Serial.println(ldrVal);
@@ -232,7 +238,9 @@ void task2code(){
         notifyStatus(2);
         eat = true;
       }
+      beep();
     }
+    buzzBlink = false;
     if(status != 2){
       avg = int(avg*0.2+(millis()-start_wait)/1000*0.8);
       Firebase.RTDB.setInt(&fbdo, "/avg", avg);
@@ -265,6 +273,20 @@ void task3code(){
     digitalWrite(pinLed, 1);
     delay(250);
     digitalWrite(pinLed, 0);
+  }
+}
+
+void beep(){
+  if(buzzBlink){
+    if(buzzOn){
+      digitalWrite(pinBuzz, 1);
+      delay(100);
+      digitalWrite(pinBuzz, 0);
+      delay(100);
+      digitalWrite(pinBuzz, 1);
+      delay(100);
+      digitalWrite(pinBuzz, 0);
+    }
   }
 }
 
@@ -319,7 +341,11 @@ void setup() {
   Serial.print(timeNow.tm_hour);
   Serial.print(" ");
   Serial.println(timeNow.tm_min);
-  if(timeNow.tm_hour == 7 && timeNow.tm_min == 0) ledBlink = true;
+  if(timeNow.tm_hour == 7 && timeNow.tm_min == 0){
+    ledBlink = true;
+    Serial.print("ledblink = ");
+    Serial.println(ledBlink);
+  }
 
   // get avg
   if(!Firebase.RTDB.getInt(&fbdo, "/avg", &avg)) Serial.println("get avg error");
@@ -333,12 +359,15 @@ void setup() {
     Serial.println(avg);
   }
 
+  runner.init();
   runner.addTask(Task1);
   Task1.enable();
   runner.addTask(Task2);
   Task2.enable();
   runner.addTask(Task3);
   if(ledBlink) Task3.enable();
+  //runner.addTask(Task4);
+  //Task4.enable();
 }
 
 void loop() {
