@@ -61,7 +61,7 @@ function App() {
   }
 
   const changePage = () => {
-    if (page == 0) setPage(1);
+    if (page === 0) setPage(1);
     else setPage(0);
   }
 
@@ -70,17 +70,17 @@ function App() {
       <div className="page-selection" onClick={changePage}>
         <h3>Status</h3>
         <h3>Set Alarm</h3>
-        <div className={page == 0 ? "page0" : "page1"}></div>
+        <div className={page === 0 ? "page0" : "page1"}></div>
       </div>
       <Status
-        cn={page == 0 ? "status active" : "status"}
+        cn={page === 0 ? "status active" : "status"}
         db={db}
       />
       <Clock
-        cn={page == 1 ? "clock-container active" : "clock-container"}
+        cn={page === 1 ? "clock-container active" : "clock-container"}
         updateList={updateList}
       />
-      <div className={page == 1 ? "alarm__container active" : "alarm__container"}>
+      <div className={page === 1 ? "alarm__container active" : "alarm__container"}>
         { alarmList && alarmList.map( (item, index) =>
           <Alarm
             minute={item.minute}
