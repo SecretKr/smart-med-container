@@ -1,2 +1,5 @@
 node_modules
 gcode
+.DS_Store
+.env
+arduino_secrets.h
