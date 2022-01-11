@@ -34,7 +34,6 @@ NTPClient timeClient(ntpUDP, "pool.ntp.org", gmtOffset_sec);
 #include <Firebase_ESP_Client.h>
 #include "addons/TokenHelper.h"
 #include "addons/RTDBHelper.h"
-#define API_KEY "AIzaSyDC06NHOw7ZXuUneZsZvUcaW4PkfOMsNWc"
 #define DATABASE_URL "https://smart-med-con-default-rtdb.asia-southeast1.firebasedatabase.app/"
 FirebaseData fbdo;
 FirebaseJson json;
@@ -299,7 +298,7 @@ void setup() {
   WiFi.mode(WIFI_STA);
   WiFiManager wm;
   bool res;
-  res = wm.autoConnect("AutoConnectAP","password");
+  res = wm.autoConnect("SMC-wifi-setup","password");
   if(!res){
     Serial.println("Failed to connect");
     ledBlink = true;
@@ -321,7 +320,7 @@ void setup() {
   LINE.setToken(LINE_TOKEN);
   Serial.printf("Firebase Client v%s\n", FIREBASE_CLIENT_VERSION);
 
-  config.api_key = API_KEY;
+  config.api_key = SECRET_API_KEY;
   config.database_url = DATABASE_URL;
   if (Firebase.signUp(&config, &auth, "", "")){
     Serial.println("Firebase OK");
