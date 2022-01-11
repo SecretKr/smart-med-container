@@ -1,5 +1,7 @@
+require('dotenv').config();
+
 const firebaseConfig = {
-    apiKey: "AIzaSyDC06NHOw7ZXuUneZsZvUcaW4PkfOMsNWc",
+    apiKey: process.env.FIREBASE_API,
     authDomain: "smart-med-con.firebaseapp.com",
     databaseURL: "https://smart-med-con-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "smart-med-con",
