@@ -8,6 +8,7 @@ export default function Status({db,cn,year,month,date,hour,minute,second}) {
   const [logList, setLoglist] = useState([]);
   const [useLed, setUseLed] = useState(false);
   const [useBuzz, setUseBuzz] = useState(false);
+  const [lineApi, setLineApi] = useState();
 
   useEffect(() => {
     onValue(ref(db, 'logs'), (snapshot) => {
@@ -32,6 +33,10 @@ export default function Status({db,cn,year,month,date,hour,minute,second}) {
     onValue(ref(db, 'buzzer'), (snapshot) => {
       setUseBuzz(snapshot.val());
     });
+
+    onValue(ref(db, 'lineAPI'), (snapshot) => {
+      setLineApi(snapshot.val());
+    });
   }, [db]);
 
   async function deleteAlarm(id) {
@@ -49,6 +54,14 @@ export default function Status({db,cn,year,month,date,hour,minute,second}) {
   async function updateBuzz(value) {
     try{
       await set(ref(db, 'buzzer'), value)
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
+
+  async function handleApiChange(event) {
+    try{
+      await set(ref(db, 'lineAPI'), event.target.value)
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -75,6 +88,10 @@ export default function Status({db,cn,year,month,date,hour,minute,second}) {
           </span>
         </div>
        </div>
+      </div>
+      <div className="lineApi">
+        <span>Line Api</span>
+        <input type="text" placeholder={lineApi} onChange={handleApiChange}></input>
       </div>
        <div className="log__container">
         <div className="log">

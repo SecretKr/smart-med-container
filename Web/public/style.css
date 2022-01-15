@@ -181,6 +181,10 @@ button {
           transition-timing-function: ease-in-out;
   opacity: 0;
   pointer-events: none;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .status.active {
@@ -209,6 +213,10 @@ button {
 
 .status .status__grid .settings {
   font-size: 2rem;
+  text-align: left;
+  -webkit-box-align: left;
+      -ms-flex-align: left;
+          align-items: left;
 }
 
 .status .status__grid .settings div {
@@ -275,9 +283,46 @@ button {
           transform: translateX(2.2rem);
 }
 
+.status .lineApi {
+  font-size: 2rem;
+  margin-top: 1.5rem;
+}
+
+.status .lineApi input {
+  -webkit-transform: translateY(-0.2rem);
+          transform: translateY(-0.2rem);
+  margin-left: 1rem;
+  width: 40rem;
+  height: 2.4rem;
+  padding: 0.5rem;
+  border-radius: 0.6rem;
+  background-color: #393E46;
+  color: #b8d6ee;
+}
+
+.status .lineApi input::-webkit-input-placeholder {
+  color: #b8d6ee;
+  opacity: 80%;
+}
+
+.status .lineApi input:-ms-input-placeholder {
+  color: #b8d6ee;
+  opacity: 80%;
+}
+
+.status .lineApi input::-ms-input-placeholder {
+  color: #b8d6ee;
+  opacity: 80%;
+}
+
+.status .lineApi input::placeholder {
+  color: #b8d6ee;
+  opacity: 80%;
+}
+
 .status .log__container {
   position: relative;
-  margin-top: 5rem;
+  margin-top: 3rem;
   width: 52rem;
   font-size: 2.5rem;
   border-style: solid;

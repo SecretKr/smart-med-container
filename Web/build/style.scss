@@ -143,9 +143,10 @@ button {
     transition-duration: $transition/2;
     transition-delay: 0;
     transition-timing-function: ease-in-out;
-    //transform: translateX(-100vh);
     opacity: 0;
     pointer-events: none;
+    text-align: center;
+    align-items: center;
     &.active {
         transition-delay: $transition/2;
         //transform: translateX(0vh);
@@ -168,6 +169,8 @@ button {
         }
         .settings {
             font-size: 2rem;
+            text-align: left;
+            align-items: left;
             div {
                 position: relative;
                 padding-bottom: 1rem;
@@ -223,9 +226,27 @@ button {
             }
         }
     }
+    .lineApi {
+        font-size: 2rem;
+        margin-top: 1.5rem;
+        input {
+            transform: translateY(-0.2rem);
+            margin-left: 1rem;
+            width: 40rem;
+            height: 2.4rem;
+            padding: 0.5rem;
+            border-radius: 0.6rem;
+            background-color: $primary2;
+            &::placeholder {
+                color: $light-accent;
+                opacity: 80%;
+            }
+            color: $light-accent;
+        }
+    }
     .log__container {
         position: relative;
-        margin-top: 5rem;
+        margin-top: 3rem;
         width: 52rem;
         font-size: 2.5rem;
         border-style: solid;
