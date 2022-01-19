@@ -1,3 +1,4 @@
+// Task
 #include <TaskScheduler.h>
 Scheduler runner;
 void task1code();
@@ -7,17 +8,14 @@ void beep();
 Task Task1(20000, TASK_FOREVER, &task1code);
 Task Task2(1000, TASK_FOREVER, &task2code);
 Task Task3(250, TASK_FOREVER, &task3code);
-//Task Task4(5000, TASK_FOREVER, &task4code);
 #include <ESP8266HTTPClient.h>
 String serverName = "http://ikwmystery.atwebpages.com";
 
 // Wifi
 #include <ESP8266WiFi.h>
 #include <WiFiManager.h>
-//char* ssid = "ff8";
-//char* password = "Tekanawww9735";
 
-// Time
+// NTP Time
 #include <time.h>
 #include <NTPClient.h>
 #include <WiFiUdp.h>
@@ -25,10 +23,15 @@ WiFiUDP ntpUDP;
 const long  gmtOffset_sec = 25200;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", gmtOffset_sec);
 
+// RTC Time
+#include <DS3231.h>
+#include <Wire.h>
+DS3231 RTCclock;
+RTClib RTC;
+
 // Line
-//#include <WiFiClientSecure.h>
 #include <TridentTD_LineNotify.h>
-#define LINE_TOKEN "0ZoNWMJCyYmoHO1Obb3POVLzSP57IHa3RQPR0IFraQx"
+String LINE_TOKEN = "";// = "0ZoNWMJCyYmoHO1Obb3POVLzSP57IHa3RQPR0IFraQx";
 
 // Firebase
 #include <Firebase_ESP_Client.h>
@@ -39,6 +42,7 @@ FirebaseData fbdo;
 FirebaseJson json;
 FirebaseAuth auth;
 FirebaseConfig config;
+#include "arduino_secrets.h"
 
 unsigned long lastTime = 0;
 unsigned long timerDelay = 5000;
@@ -70,116 +74,18 @@ struct tm alarmTime[50];
 struct tm timeNow;
 struct tm timeOut;
 
-void getTime(){
-  timeClient.update();
-  timeNow.tm_hour = timeClient.getHours();
-  timeNow.tm_min = timeClient.getMinutes();
-}
-
-void getTimeSet(){
-  if(Firebase.ready()){
-    Firebase.RTDB.getJSON(&fbdo, "/alarms");
-    json = fbdo.to<FirebaseJson>();
-    size_t len = json.iteratorBegin();
-    int hour, minute;
-    alarms = 0;
-    for(size_t i = 0;i < len;i++){
-      FirebaseJson::IteratorValue value = json.valueAt(i);
-      if(String(value.key.c_str()) == "hour") hour = atoi(value.value.c_str());
-      if(String(value.key.c_str()) == "minute") {
-        minute = atoi(value.value.c_str());
-        //Serial.println(hour);
-        //Serial.println(minute);
-        alarmTime[alarms].tm_hour = hour;
-        alarmTime[alarms++].tm_min = minute;
-      }
-    }
-    json.iteratorEnd();
-  }
-  else Serial.println("Firebase not ready");
-}
-
-void getSetting(){
-  if(Firebase.ready()){
-    bool ledOnSetting, buzzOnSetting;
-    Firebase.RTDB.getBool(&fbdo, "led", &ledOnSetting);
-    Firebase.RTDB.getBool(&fbdo, "buzzer", &buzzOnSetting);
-    if(ledOnSetting != ledOn){
-      ledOn = ledOnSetting;
-      EEPROM.put(0, ledOn);
-      Serial.print("led ");
-      Serial.println(ledOn);
-      EEPROM.commit();
-    }
-    if(buzzOnSetting != buzzOn){
-      buzzOn = buzzOnSetting;
-      EEPROM.put(1, buzzOn);
-      Serial.print("buzz ");
-      Serial.println(buzzOn);
-      EEPROM.commit();
-    }
-  }
-}
-
-void setLogs(int ho, int mi, int et){
-  timeClient.update();
-  unsigned long epochTime = timeClient.getEpochTime();
-  struct tm * ptm = localtime ((time_t *)&epochTime); 
-  FirebaseJson json;
-  int year = ptm->tm_year+1900;
-  int month = ptm->tm_mon+1;
-  int date = ptm->tm_mday;
-  json.set("year", year);
-  json.set("month", month);
-  json.set("date", date);
-  json.set("hour", ho);
-  json.set("minute", mi);
-  json.set("eatTime", et);
-  String sMonth, sDate;
-  if(month < 10) sMonth = "0"+String(month);
-  else sMonth = String(month);
-  if(date < 10) sDate = "0"+String(date);
-  else sDate = String(date);
-  if(!Firebase.RTDB.set(&fbdo, "logs/"+ String(year)+ sMonth+ sDate+ String(ho)+ String(mi), &json)) Serial.println("Firebase set log error");
-}
-
-void notifyStatus(int sta){
-  Serial.print("sending ");
-  Serial.println(sta);
-//  if(WiFi.status()== WL_CONNECTED){
-//    HTTPClient http;
-//    String serverPath = serverName;
-//    if(sta == 1) serverPath += "/SMC.php?send=1";
-//    if(sta == 2) serverPath += "/SMC.php?send=2";
-//    if(sta == 0) serverPath += "/SMC.php?send=3";
-//    if(sta == 3) serverPath += "/SMC.php?send=4";
-//    http.begin(serverPath.c_str());
-//    int httpResponseCode = http.GET();
-//    if (httpResponseCode>0) {
-//      //Serial.print("HTTP Response code: ");
-//      //Serial.println(httpResponseCode);
-//      String payload = http.getString();
-//      //Serial.println(payload);
-//    }
-//    else {
-//      Serial.print("Error code: ");
-//      Serial.println(httpResponseCode);
-//    }
-//    http.end();
-//  }
-//  else {
-//    Serial.println("WiFi Disconnected");
-//  }
-  //lastTime = millis();
-  if(sta == 0) LINE.notify("OK");
-  if(sta == 1) LINE.notify("Time to take medicine");
-  if(sta == 2) LINE.notify("Forgot to take medicine");
-  if(sta == 3) LINE.notify("Place Med Container back");
-}
+void getTime();
+void getTimeNTP();
+void getTimeSet();
+void getSetting();
+void getTOKEN();
+void setLogs();
+void notifyStatus();
 
 void task1code(){
   getTime();
   getTimeSet();
+  getTOKEN();
   Serial.print(timeNow.tm_hour);
   Serial.print(" ");
   Serial.println(timeNow.tm_min);
@@ -249,7 +155,7 @@ void task2code(){
     ldrVal = analogRead(LDR);
     while(ldrVal < ldrSet){
       delay(1000);
-      if(millis() - eat_t > eat_avg*1000+60000){
+      if(millis() - eat_t > eat_avg*1000+120000){
         notifyStatus(3);
         eat_t += 30000;
       }
@@ -317,10 +223,9 @@ void setup() {
   Serial.println(buzzOn);
   
   timeClient.begin();
-  LINE.setToken(LINE_TOKEN);
   Serial.printf("Firebase Client v%s\n", FIREBASE_CLIENT_VERSION);
 
-  config.api_key = SECRET_API_KEY;
+  config.api_key = Firebase_api;
   config.database_url = DATABASE_URL;
   if (Firebase.signUp(&config, &auth, "", "")){
     Serial.println("Firebase OK");
@@ -332,8 +237,16 @@ void setup() {
   config.token_status_callback = tokenStatusCallback;
   Firebase.begin(&config, &auth);
   Firebase.reconnectWiFi(true);
+  // get line token
+  if(!Firebase.RTDB.getString(&fbdo, "/lineAPI", &LINE_TOKEN)) Serial.println("get lineToken error");
+  else{
+    Serial.print("lineToken ");
+    Serial.println(LINE_TOKEN);
+  }
+  getTOKEN();
+  LINE.setToken(LINE_TOKEN);
   
-  getTime();
+  getTimeNTP();
   getTimeSet();
   getSetting();
   Serial.print("timeNow ");
@@ -352,10 +265,10 @@ void setup() {
     Serial.print("avg ");
     Serial.println(avg);
   }
-  if(!Firebase.RTDB.getInt(&fbdo, "/eat-avg", &avg)) Serial.println("get eat-avg error");
+  if(!Firebase.RTDB.getInt(&fbdo, "/eat-avg", &eat_avg)) Serial.println("get eat-avg error");
   else{
     Serial.print("eat-avg ");
-    Serial.println(avg);
+    Serial.println(eat_avg);
   }
 
   runner.init();
@@ -365,10 +278,115 @@ void setup() {
   Task2.enable();
   runner.addTask(Task3);
   if(ledBlink) Task3.enable();
-  //runner.addTask(Task4);
-  //Task4.enable();
 }
 
 void loop() {
   runner.execute();
+}
+
+void getTime(){
+//  DateTime now = RTC.now();
+//  timeNow.tm_hour = now.hour();
+//  timeNow.tm_min = now.minute();
+  getTimeNTP();
+}
+
+void getTimeNTP(){
+  timeClient.update();
+  timeNow.tm_hour = timeClient.getHours();
+  timeNow.tm_min = timeClient.getMinutes();
+  timeNow.tm_sec = timeClient.getSeconds();
+//  if(timeNow.tm_hour != 7 || timeNow.tm_min != 0){
+//    Serial.println("Getting Time from NTP");
+//    RTCclock.setHour(timeNow.tm_hour);
+//    RTCclock.setMinute(timeNow.tm_min);
+//    RTCclock.setSecond(timeNow.tm_sec);
+//  }
+}
+
+void getTimeSet(){
+  if(Firebase.ready()){
+    Firebase.RTDB.getJSON(&fbdo, "/alarms");
+    json = fbdo.to<FirebaseJson>();
+    size_t len = json.iteratorBegin();
+    int hour, minute;
+    alarms = 0;
+    for(size_t i = 0;i < len;i++){
+      FirebaseJson::IteratorValue value = json.valueAt(i);
+      if(String(value.key.c_str()) == "hour") hour = atoi(value.value.c_str());
+      if(String(value.key.c_str()) == "minute") {
+        minute = atoi(value.value.c_str());
+        //Serial.println(hour);
+        //Serial.println(minute);
+        alarmTime[alarms].tm_hour = hour;
+        alarmTime[alarms++].tm_min = minute;
+      }
+    }
+    json.iteratorEnd();
+  }
+  else Serial.println("Firebase not ready");
+}
+
+void getSetting(){
+  if(Firebase.ready()){
+    bool ledOnSetting, buzzOnSetting;
+    Firebase.RTDB.getBool(&fbdo, "led", &ledOnSetting);
+    Firebase.RTDB.getBool(&fbdo, "buzzer", &buzzOnSetting);
+    if(ledOnSetting != ledOn){
+      ledOn = ledOnSetting;
+      EEPROM.put(0, ledOn);
+      Serial.print("led ");
+      Serial.println(ledOn);
+      EEPROM.commit();
+    }
+    if(buzzOnSetting != buzzOn){
+      buzzOn = buzzOnSetting;
+      EEPROM.put(1, buzzOn);
+      Serial.print("buzz ");
+      Serial.println(buzzOn);
+      EEPROM.commit();
+    }
+  }
+}
+
+void getTOKEN(){
+  if(Firebase.ready()){
+    String TOKENSetting = "";
+    if(!Firebase.RTDB.getString(&fbdo, "/lineAPI", &TOKENSetting)) Serial.println("get lineToken error");
+    if(TOKENSetting != "" && TOKENSetting != LINE_TOKEN){
+      LINE_TOKEN = TOKENSetting;
+      LINE.setToken(LINE_TOKEN);
+    }
+  }
+}
+
+void setLogs(int ho, int mi, int et){
+  timeClient.update();
+  unsigned long epochTime = timeClient.getEpochTime();
+  struct tm * ptm = localtime ((time_t *)&epochTime); 
+  FirebaseJson json;
+  int year = ptm->tm_year+1900;
+  int month = ptm->tm_mon+1;
+  int date = ptm->tm_mday;
+  json.set("year", year);
+  json.set("month", month);
+  json.set("date", date);
+  json.set("hour", ho);
+  json.set("minute", mi);
+  json.set("eatTime", et);
+  String sMonth, sDate;
+  if(month < 10) sMonth = "0"+String(month);
+  else sMonth = String(month);
+  if(date < 10) sDate = "0"+String(date);
+  else sDate = String(date);
+  if(!Firebase.RTDB.set(&fbdo, "logs/"+ String(year)+ sMonth+ sDate+ String(ho)+ String(mi), &json)) Serial.println("Firebase set log error");
+}
+
+void notifyStatus(int sta){
+  Serial.print("sending ");
+  Serial.println(sta);
+  if(sta == 0) LINE.notify("OK");
+  if(sta == 1) LINE.notify("Time to take medicine");
+  if(sta == 2) LINE.notify("Forgot to take medicine");
+  if(sta == 3) LINE.notify("Place Med Container back");
 }
