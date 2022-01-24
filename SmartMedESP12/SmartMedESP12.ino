@@ -374,12 +374,16 @@ void setLogs(int ho, int mi, int et){
   json.set("hour", ho);
   json.set("minute", mi);
   json.set("eatTime", et);
-  String sMonth, sDate;
+  String sMonth, sDate, sHo, sMi;
   if(month < 10) sMonth = "0"+String(month);
   else sMonth = String(month);
   if(date < 10) sDate = "0"+String(date);
   else sDate = String(date);
-  if(!Firebase.RTDB.set(&fbdo, "logs/"+ String(year)+ sMonth+ sDate+ String(ho)+ String(mi), &json)) Serial.println("Firebase set log error");
+  if(ho < 10) sHo = "0"+String(ho);
+  else sHo = String(ho);
+  if(mi < 10) sMi = "0"+String(mi);
+  else sMi = String(mi);
+  if(!Firebase.RTDB.set(&fbdo, "logs/"+ String(year)+ sMonth+ sDate+ sHo+ sMi, &json)) Serial.println("Firebase set log error");
 }
 
 void notifyStatus(int sta){
