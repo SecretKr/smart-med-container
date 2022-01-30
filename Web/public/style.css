@@ -41,6 +41,7 @@ button {
 }
 
 .app {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -55,6 +56,18 @@ button {
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 2rem 0;
+}
+
+.app .info {
+  position: absolute;
+  top: 2.5rem;
+  right: 4.5rem;
+  color: #b8d6ee;
+}
+
+.app .info a, .app .info a:hover, .app .info a:visited, .app .info a:active {
+  color: inherit;
+  text-decoration: none;
 }
 
 .app .page-selection {

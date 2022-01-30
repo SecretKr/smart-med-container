@@ -67,6 +67,11 @@ function App() {
 
   return (
     <div className="app">
+      <div className="info">
+        <a href="./smc-manual.pdf" target="_blank">
+          <i className="fas fa-info-circle fa-3x"></i>
+        </a>
+      </div>
       <div className="page-selection" onClick={changePage}>
         <h3>Status</h3>
         <h3>Set Alarm</h3>
