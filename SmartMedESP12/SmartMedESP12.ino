@@ -147,7 +147,7 @@ void task2code(){
     }
     buzzBlink = false;
     if(status != 2){
-      avg = int(avg*0.2+(millis()-start_wait)/1000*0.8);
+      avg = int(avg*0.5+(millis()-start_wait)/1000*0.5);
       Firebase.RTDB.setInt(&fbdo, "/avg", avg);
     }
     int start_eat = millis();
@@ -163,7 +163,7 @@ void task2code(){
     }
     if(start_eat == eat_t){
       int eatingTime = (millis()-start_eat)/1000;
-      eat_avg = int(eat_avg*0.2+eatingTime*0.8);
+      eat_avg = int(eat_avg*0.5+eatingTime*0.5);
       Firebase.RTDB.setInt(&fbdo, "/eat-avg", eat_avg);
       setLogs(alarmTime[nAlarm].tm_hour, alarmTime[nAlarm].tm_min, eatingTime);
     }
