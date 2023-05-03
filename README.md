@@ -1,1 +1,0 @@
-# Smart Medicine Container
